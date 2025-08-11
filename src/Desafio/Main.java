@@ -1,4 +1,4 @@
-package Desafio;
+package src.Desafio;
 
 import java.util.Scanner;
 
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("\nProduto " + i + ":");
             System.out.print("Nome: ");
             String nomeProduto = sc.nextLine();
-            System.out.print("Preço: ");
+            System.out.print("Preço: R$ ");
             double preco = sc.nextDouble();
             System.out.print("Quantidade: ");
             int quantidade = sc.nextInt();

@@ -1,4 +1,4 @@
-package Desafio;
+package src.Desafio;
 
 public class Produto {
     private String nome;

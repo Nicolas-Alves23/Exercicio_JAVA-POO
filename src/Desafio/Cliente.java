@@ -1,4 +1,4 @@
-package Desafio;
+package src.Desafio;
 
 public class Cliente {
     private String nome;

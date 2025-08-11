@@ -1,4 +1,4 @@
-package Desafio;
+package src.Desafio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +33,17 @@ public class Carrinho {
     public void mostrarResumo() {
         System.out.println("Resumo do Carrinho:");
         for (Item item : itens) {
-            System.out.println(item.getProduto().getNome() + " - R$"
-                    + String.format("%.2f", item.getProduto().getPreco()) +
-                    " x " + item.getQuantidade());
+
+            System.out.println(
+                    item.getProduto().getNome() + " - R$" +
+                            item.getProduto().getPreco() + " x " +
+                            item.getQuantidade());
+
         }
-        System.out.println("Total: R$" + String.format("%.2f", calcularTotal()));
+
+        System.out.println("Total: R$" + calcularTotal());
+
+
     }
 
     // Novo método para aplicar desconto em um produto pelo nome
