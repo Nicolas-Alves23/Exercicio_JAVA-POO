@@ -9,7 +9,7 @@ public class Carrinho {
     public void adicionarProduto(Produto produto, int quantidade) {
         // Se já existir, soma a quantidade
         for (Item item : itens) {
-            if (item.getProduto().getNome().equals(produto.getNome())) {
+            if (item.getProduto().getNome().equalsIgnoreCase(produto.getNome())) {
                 item.adicionarQuantidade(quantidade);
                 return;
             }
@@ -33,12 +33,26 @@ public class Carrinho {
     public void mostrarResumo() {
         System.out.println("Resumo do Carrinho:");
         for (Item item : itens) {
-            System.out.println(item.getProduto().getNome() + " - R$" + item.getProduto().getPreco() +
+            System.out.println(item.getProduto().getNome() + " - R$"
+                    + String.format("%.2f", item.getProduto().getPreco()) +
                     " x " + item.getQuantidade());
         }
-        System.out.println("Total: R$" + calcularTotal());
+        System.out.println("Total: R$" + String.format("%.2f", calcularTotal()));
     }
 
+    // Novo método para aplicar desconto em um produto pelo nome
+    public void aplicarDesconto(String nomeProduto, double percentual) {
+        for (Item item : itens) {
+            if (item.getProduto().getNome().equalsIgnoreCase(nomeProduto)) {
+                item.getProduto().aplicarDesconto(percentual);
+                System.out.println("Desconto de " + percentual + "% aplicado em " + nomeProduto);
+                return;
+            }
+        }
+        System.out.println("Produto não encontrado no carrinho.");
+    }
+
+    // Classe interna para armazenar produto + quantidade
     private class Item {
         private Produto produto;
         private int quantidade;
@@ -61,4 +75,3 @@ public class Carrinho {
         }
     }
 }
-

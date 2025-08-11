@@ -1,38 +1,67 @@
 package Desafio;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         // Criar cliente
-        Cliente cliente = new Cliente("Maria Silva", "maria@email.com");
+        System.out.print("Digite o nome do cliente: ");
+        String nomeCliente = sc.nextLine();
+        System.out.print("Digite o e-mail do cliente: ");
+        String emailCliente = sc.nextLine();
+
+        Cliente cliente = new Cliente(nomeCliente, emailCliente);
         cliente.mostrarDados();
 
-        // Criar produtos
-        Produto p1 = new Produto("Camiseta", 50);
-        Produto p2 = new Produto("Calça", 120);
-        Produto p3 = new Produto("Tênis", 200);
-
-        // Criar carrinho e adicionar produtos
+        // Criar carrinho
         Carrinho carrinho = new Carrinho();
-        carrinho.adicionarProduto(p1, 2);
-        carrinho.adicionarProduto(p2, 1);
-        carrinho.adicionarProduto(p3, 1);
+
+        // Adicionar produtos
+        System.out.print("\nQuantos produtos deseja adicionar? ");
+        int qtdProdutos = sc.nextInt();
+        sc.nextLine(); // limpar quebra de linha
+
+        for (int i = 1; i <= qtdProdutos; i++) {
+            System.out.println("\nProduto " + i + ":");
+            System.out.print("Nome: ");
+            String nomeProduto = sc.nextLine();
+            System.out.print("Preço: ");
+            double preco = sc.nextDouble();
+            System.out.print("Quantidade: ");
+            int quantidade = sc.nextInt();
+            sc.nextLine(); // limpar quebra de linha
+
+            Produto produto = new Produto(nomeProduto, preco);
+            carrinho.adicionarProduto(produto, quantidade);
+        }
 
         // Mostrar resumo antes do desconto
+        System.out.println("\nResumo do carrinho (antes do desconto):");
         carrinho.mostrarResumo();
 
-        // Aplicar desconto em um produto (exemplo: 10% em "Calça")
-        p2.aplicarDesconto(10);
+        // Aplicar desconto
+        System.out.print("\nDigite o nome do produto para aplicar desconto: ");
+        String nomeDesconto = sc.nextLine();
+        System.out.print("Digite o percentual de desconto: ");
+        double percentual = sc.nextDouble();
+        sc.nextLine();
+
+        // Aplicando desconto no produto correspondente
+        carrinho.aplicarDesconto(nomeDesconto, percentual);
 
         System.out.println("\nDepois do desconto:");
-
-        // Mostrar resumo depois do desconto
         carrinho.mostrarResumo();
 
-        // Remover produto pelo nome (exemplo: remover "Camiseta")
-        carrinho.removerProduto("Camiseta");
+        // Remover produto
+        System.out.print("\nDigite o nome do produto para remover: ");
+        String nomeRemover = sc.nextLine();
+        carrinho.removerProduto(nomeRemover);
 
-        System.out.println("\nDepois de remover a Camiseta:");
+        System.out.println("\nDepois de remover o produto:");
         carrinho.mostrarResumo();
+
+        sc.close();
     }
 }
-
